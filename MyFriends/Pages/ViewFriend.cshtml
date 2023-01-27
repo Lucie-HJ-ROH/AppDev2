@@ -1,0 +1,23 @@
+@page
+@model MyFriends.Pages.ViewFriend
+
+@{
+    ViewData["Title"] = "View";
+}
+<div>
+
+    <ul class="orderPageList">
+        <li>
+            <div class="form-group">
+                <label asp-for="Friend.Name"></label>
+                <span>: @Model.Friend.Name</span>
+            </div>
+        </li>
+        <li>
+            <div class="form-group">
+                <label asp-for="Friend.Age"></label>
+                <span>: @Model.Friend.Age</span>
+            </div>
+        </li>
+    </ul>
+</div>

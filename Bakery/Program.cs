@@ -6,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<BakeryContext>();
 
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

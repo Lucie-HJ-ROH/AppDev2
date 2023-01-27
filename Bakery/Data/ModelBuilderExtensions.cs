@@ -4,8 +4,7 @@ namespace Bakery.Data
 {
     public static class ModelBuilderExtensions
     {
-        public static ModelBuilder Seed(this ModelBuilder modelBuilder)
-        {
+        public static ModelBuilder Seed(this ModelBuilder modelBuilder){
             modelBuilder.Entity<Product>().HasData(
                 new Product
                 {

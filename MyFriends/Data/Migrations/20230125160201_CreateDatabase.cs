@@ -2,7 +2,9 @@
 
 #nullable disable
 
-namespace Bakery.Data.Migrations
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
+namespace MyFriends.Data.Migrations
 {
     /// <inheritdoc />
     public partial class CreateDatabase : Migration
@@ -11,19 +13,26 @@ namespace Bakery.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Products",
+                name: "Friends",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", nullable: false),
-                    Description = table.Column<string>(type: "TEXT", nullable: false),
-                    Price = table.Column<decimal>(type: "TEXT", nullable: false),
-                    ImageFileName = table.Column<string>(type: "TEXT", nullable: false)
+                    Name = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
+                    Age = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Products", x => x.Id);
+                    table.PrimaryKey("PK_Friends", x => x.Id);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Friends",
+                columns: new[] { "Id", "Age", "Name" },
+                values: new object[,]
+                {
+                    { 1, 5, "Jonny" },
+                    { 2, 6, "Ponny" }
                 });
         }
 
@@ -31,7 +40,7 @@ namespace Bakery.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Products");
+                name: "Friends");
         }
     }
 }
