@@ -36,19 +36,19 @@
                             <a class="nav-link text-dark" asp-area="" asp-page="/ArticleAdd">Add article</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Logout">Log out</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Account/Logout">Log out</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Profile">@User.Identity.Name</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Account/Profile">@User.Identity.Name</a>
                         </li>
                     }
                     else
                     {
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Register">Register</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Account/Register">Register</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Login">Login</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Account/Login">Login</a>
                         </li>
                     }
                 </ul>

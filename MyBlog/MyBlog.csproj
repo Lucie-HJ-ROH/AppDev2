@@ -16,4 +16,13 @@
       <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.2" />
     </ItemGroup>
 
+    <ItemGroup>
+      <AdditionalFiles Include="Pages\Account\Register.cshtml" />
+      <AdditionalFiles Include="Pages\Account\RegisterSuccess.cshtml" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Pages\Admin" />
+    </ItemGroup>
+
 </Project>
