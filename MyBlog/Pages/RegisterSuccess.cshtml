@@ -1,0 +1,13 @@
+@page
+@model MyBlog.Pages.RegisterSuccess
+@{
+    ViewData["Title"] = "Register Success";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@{
+    <p>Registration Succeeded with email @Model.Email .
+        <a class="nav-link" asp-area="" asp-page="/Login">Click here to Log in.</a></p>
+                  
+}
