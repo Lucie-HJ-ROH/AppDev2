@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using MyBlog.Data;
 using MyBlog.Model;
 
@@ -7,8 +8,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<BlogDbContext>();
+
+
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(options=>
-    options.SignIn.RequireConfirmedAccount = false).AddEntityFrameworkStores<BlogDbContext>();
+    options.SignIn.RequireConfirmedAccount = false)
+    .AddEntityFrameworkStores<BlogDbContext>()
+    .AddRoles<IdentityRole>();
 builder.Services.Configure<IdentityOptions>(options =>
 {
     // Password settings.
@@ -41,7 +46,7 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.AccessDeniedPath = "/AccessDenied";
     options.SlidingExpiration = true;
 });
-builder.Services.AddRole
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -62,5 +67,20 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapRazorPages();
+
+using (var scope = app.Services.CreateScope()) {
+    var services = scope.ServiceProvider;
+
+    var context = services.GetRequiredService<BlogDbContext>();    
+    
+    context.Database.Migrate();
+
+    var userMgr = services.GetRequiredService<UserManager<IdentityUser>>();  
+    var roleMgr = services.GetRequiredService<RoleManager<IdentityRole>>();  
+
+    IdentitySeedData.Initialize(context, userMgr, roleMgr).Wait();
+}
+
+
 
 app.Run();

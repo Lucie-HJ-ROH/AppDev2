@@ -57,8 +57,12 @@ public class Register : PageModel
             if (result.Succeeded)
             {
               //  await _signInManager.SignInAsync(user, isPersistent: true);
-                _logger.LogInformation($"User {Input.Email} create a new account with password.");
-                return RedirectToPage("RegisterSuccess",new {email = Input.Email});
+              var roleResult = _userManager.AddToRoleAsync(user, "User").Result;
+              if (roleResult.Succeeded)
+              {
+                  _logger.LogInformation($"User {Input.Email} create a new account with password.");
+                  return RedirectToPage("RegisterSuccess", new { email = Input.Email });
+              }
             }
 
             foreach (var error in result.Errors)

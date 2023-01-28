@@ -2,9 +2,13 @@
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
+    var inUserRole = User.IsInRole("User");
+    var inAdminRole = User.IsInRole("Admin");
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+     <p>Is Admin: @inAdminRole</p>
+    <p>Is User: @inUserRole</p>
+  
 </div>
