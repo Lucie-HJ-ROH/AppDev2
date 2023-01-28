@@ -21,8 +21,4 @@
       <AdditionalFiles Include="Pages\Account\RegisterSuccess.cshtml" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Pages\Admin" />
-    </ItemGroup>
-
 </Project>
