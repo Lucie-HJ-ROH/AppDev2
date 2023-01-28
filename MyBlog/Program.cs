@@ -7,7 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<BlogDbContext>();
-builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<BlogDbContext>();
+builder.Services.AddIdentity<IdentityUser, IdentityRole>(options=>
+    options.SignIn.RequireConfirmedAccount = false).AddEntityFrameworkStores<BlogDbContext>();
 builder.Services.Configure<IdentityOptions>(options =>
 {
     // Password settings.
@@ -40,7 +41,7 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.AccessDeniedPath = "/AccessDenied";
     options.SlidingExpiration = true;
 });
-
+builder.Services.AddRole
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
