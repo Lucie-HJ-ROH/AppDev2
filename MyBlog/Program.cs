@@ -57,6 +57,22 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+using (var scope = app.Services.CreateScope()) {
+    var services = scope.ServiceProvider;
+
+    var context = services.GetRequiredService<BlogDbContext>();    
+    
+    context.Database.Migrate();
+
+    var userMgr = services.GetRequiredService<UserManager<IdentityUser>>();  
+    var roleMgr = services.GetRequiredService<RoleManager<IdentityRole>>();  
+    
+    // var userManager = builder.Services.BuildServiceProvider().GetService<UserManager<IdentityUser>>();
+    // var roleManager = builder.Services.BuildServiceProvider().GetService<RoleManager<IdentityRole>>();
+
+    IdentitySeedData.Initialize(context, userMgr, roleMgr).Wait();
+}
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
@@ -67,19 +83,6 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapRazorPages();
-
-using (var scope = app.Services.CreateScope()) {
-    var services = scope.ServiceProvider;
-
-    var context = services.GetRequiredService<BlogDbContext>();    
-    
-    context.Database.Migrate();
-
-    var userMgr = services.GetRequiredService<UserManager<IdentityUser>>();  
-    var roleMgr = services.GetRequiredService<RoleManager<IdentityRole>>();  
-
-    IdentitySeedData.Initialize(context, userMgr, roleMgr).Wait();
-}
 
 
 
