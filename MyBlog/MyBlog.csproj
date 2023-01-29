@@ -22,4 +22,8 @@
       <AdditionalFiles Include="Pages\Account\RegisterSuccess.cshtml" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Include="wwwroot\Uploads\HYUNJU.jpg" />
+    </ItemGroup>
+
 </Project>

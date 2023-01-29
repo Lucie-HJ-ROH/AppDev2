@@ -30,7 +30,7 @@ namespace MyBlog.Pages.Admin.Articles
                 return NotFound();
             }
 
-            var article = await _context.Articles.FirstOrDefaultAsync(m => m.Id == id);
+            var article = await _context.Articles.Include("Author").FirstOrDefaultAsync(m => m.Id == id);
             if (article == null)
             {
                 return NotFound();
