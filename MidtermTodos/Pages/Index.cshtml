@@ -1,0 +1,66 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@inject SignInManager<IdentityUser> _signManager;
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Please Log in for using this web site.</p>
+
+  @if (_signManager.IsSignedIn(User))
+  {
+
+      <table class="table">
+          <thead>
+          <tr>
+              <th>
+                  @Html.DisplayNameFor(model=> model.Todo[0].Owner.UserName)
+              </th>
+              <th>
+                  @Html.DisplayNameFor(model => model.Todo[0].Task)
+              </th>
+              <th>
+                  @Html.DisplayNameFor(model => model.Todo[0].DueDate)
+              </th>
+              <th>
+                  @Html.DisplayNameFor(model => model.Todo[0].IsDone)
+              </th>
+              <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          @foreach (var item in Model.Todo)
+          {
+              <tr>
+                  <td>
+                      @Html.DisplayFor(modelItem => item.Owner.UserName)
+                  </td>
+                  <td>
+                      @Html.DisplayFor(modelItem => item.Task)
+                  </td>
+                  <td>
+                      @Html.DisplayFor(model => item.DueDate)
+                  </td>
+                  <td>
+                      @Html.DisplayFor(modelItem => item.IsDone)
+                  </td>
+                  <td>
+                      @if (User.Identity.Name == item.Owner.UserName)
+                      {
+                          <a asp-page="./Todo/Edit" asp-route-id="@item.Id">Edit</a>
+                          <a asp-page="./Todo/Delete" asp-route-id="@item.Id">Delete</a>
+                      }
+
+                  </td>
+              </tr>
+          }
+          </tbody>
+      </table>
+  }
+    
+</div>
+

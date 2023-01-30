@@ -1,0 +1,14 @@
+@page
+@model MidtermTodos.Pages.Account.RegisterSuccess
+
+@{
+    ViewData["Title"] = "Register Success";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@{
+    <p>Registration Succeeded  @Model.User.Identity.Name .
+        <a class="nav-link" asp-area="" asp-page="/Account/Login">Click here to Log in.</a></p>
+                  
+}
